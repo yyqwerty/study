@@ -1,0 +1,21 @@
+@startuml
+left to right direction
+skinparam actorStyle awesome
+actor "Аналитик" as analyst
+actor "Ведущий аналитик" as leadanalyst
+actor "Администратор" as admin
+rectangle "Подсистема управления жизненным циклом требований" {
+    usecase "Создание требования"
+    usecase "Изменение требования"
+    usecase "Удаление требования"
+}
+rectangle "Управление структурой ИС" {
+    usecase "Создание требования"
+    usecase "Изменение требования"
+    usecase "Удаление требования"
+}
+(Один прецедент)
+(Другой прецедент) as (UC2)
+usecase Прецедент3
+usecase (Последний\nпрецедент) as UC4
+@enduml
