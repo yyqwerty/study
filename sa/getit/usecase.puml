@@ -1,21 +1,37 @@
 @startuml
 left to right direction
 skinparam actorStyle awesome
+actor "Гость" as guest
 actor "Аналитик" as analyst
 actor "Ведущий аналитик" as leadanalyst
 actor "Администратор" as admin
-rectangle "Подсистема управления жизненным циклом требований" {
+actor "Владелец" as owner
+rectangle "Подсистема управления жизненным циклом требований" as lifecycle {
+    usecase "Просмотр требований"
     usecase "Создание требования"
     usecase "Изменение требования"
     usecase "Удаление требования"
 }
-rectangle "Управление структурой ИС" {
-    usecase "Создание требования"
-    usecase "Изменение требования"
-    usecase "Удаление требования"
+rectangle "Подсистема управления структурой ИС" as structure {
+    usecase "Взаимодействие с морфологической структурой ИС"
+    usecase "Взаимодействие с функциональной структурой ИС"
+    usecase "Взаимодействие с информационной структурой ИС"
 }
+
+rectangle "Подсистема управления пользователями" as users {
+    usecase "Настройка ролей"
+    usecase "Настройка доступов"
+}
+
+guest -- (Просмотр требований)
+analyst --> (Взаимодействие с морфологической структурой ИС)
+(Взаимодействие с морфологической структурой ИС) ..> (Изменение требования)
+@enduml
+
+analyst --> lifecycle
+structure -[hidden]up-> lifecycle
+lifecycle -[hidden]up-> users
 (Один прецедент)
 (Другой прецедент) as (UC2)
 usecase Прецедент3
 usecase (Последний\nпрецедент) as UC4
-@enduml
